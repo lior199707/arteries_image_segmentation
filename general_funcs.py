@@ -18,6 +18,12 @@ def display_image(image, title):
     plt.axis('off')
     plt.show()
 
+def display_rgbimage(image, title):
+    plt.imshow(image)
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
+
 def filter_image_top(image):
    # Get the shape of the image
     height, width = image.shape    
@@ -28,6 +34,18 @@ def filter_image_top(image):
     # Multiply the filter matrix by the image
     filtered_image = image * filter_matrix
     return filtered_image
+
+def filter_rgbimage_top(image):
+   # Get the shape of the image
+    height, width, channels = image.shape
+    # Create a filter matrix with ones
+    filter_matrix = np.ones((height, width, channels), dtype=image.dtype)
+    # Set rows y = 0 to y = 175 to zeros
+    filter_matrix[0:176, :, :] = 0  # Note: Includes row 175
+    # Multiply the filter matrix by the image
+    filtered_image = image * filter_matrix
+    return filtered_image
+
 
 def is_8bit_image(image):
     """
